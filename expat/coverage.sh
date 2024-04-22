@@ -166,7 +166,7 @@ _run() {
     local capture_dir=.
 
     local BASE_FLAGS='-pipe -Wall -Wextra -pedantic -Wno-overlength-strings'
-    BASE_FLAGS+=' --coverage --no-inline'
+    BASE_FLAGS+=' --coverage -fno-inline'
 
     ${with_unsigned_char} && BASE_FLAGS="${BASE_FLAGS} -funsigned-char"
 
