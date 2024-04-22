@@ -31,7 +31,7 @@
 # USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 export PS4='# '
-
+set -eu
 
 _get_source_dir() {
     echo "source__${version}"
@@ -133,7 +133,7 @@ _copy_missing_mingw_libaries() {
     for dll in libgcc_s_dw2-1.dll libgcc_s_sjlj-1.dll libstdc++-6.dll; do
         (
             set -x
-            ln -s "${mingw_gcc_dll_dir}"/${dll} "${target}"/${dll}
+            ln -fs "${mingw_gcc_dll_dir}"/${dll} "${target}"/${dll}
         )
     done
 
@@ -144,7 +144,7 @@ _copy_missing_mingw_libaries() {
             source="${mingw_pthread_dll_dir}"/${dll}
             (
                 set -x
-                ln -s "${source}" "${target}"/${dll}
+                ln -fs "${source}" "${target}"/${dll}
             )
         done
     fi
@@ -152,7 +152,7 @@ _copy_missing_mingw_libaries() {
     for dll in libexpat{,w}-*.dll; do
         (
             set -x
-            ln -s "${abs_build_dir}"/${dll} "${target}"/${dll}
+            ln -fs "${abs_build_dir}"/${dll} "${target}"/${dll}
         )
     done
 }
@@ -294,7 +294,7 @@ _main() {
 
         # Make sure we don't need to download xmlts.zip over and over again
         if [[ ${#build_dirs[*]} -gt 0 ]]; then
-            ln -s "$PWD/${build_dirs[0]}/tests/xmlts.zip" "${build_dir}"/tests/
+            ln -fs "$PWD/${build_dirs[0]}/tests/xmlts.zip" "${build_dir}"/tests/
         fi
 
         _run "${source_dir}" "${build_dir}"
