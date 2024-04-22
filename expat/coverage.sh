@@ -120,7 +120,7 @@ _copy_to() {
     [[ -d "${target_dir}" ]] && return 0
 
     mkdir "${target_dir}"
-    git archive --format=tar "${version}" | ( cd "${target_dir}" && tar x )
+    git archive --format=tar "${version}" | tar x -C "${target_dir}"
 }
 
 
