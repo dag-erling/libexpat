@@ -323,7 +323,10 @@ _main() {
     done
 
     # Single cases:
-    with_libbsd=true _build_case
+    case $(uname -s) in
+    Darwin|*BSD) ;;
+    *) with_libbsd=true _build_case ;;
+    esac
     with_unsigned_char=true _build_case
     with_m32=true _build_case
     with_dtd=false with_ge=true _build_case
